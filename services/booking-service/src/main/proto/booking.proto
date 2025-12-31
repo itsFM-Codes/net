@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "BookingProto";
+
+package tpa.network.bookingservice;
+
+message Booking {
+  string id = 1;
+  string user_id = 2;
+  string event_id = 3;
+  int32 quantity = 4;
+}
+
+service BookingQueryService {
+  rpc GetAllBookings(GetAllBookingsRequest) returns (GetAllBookingsResponse);
+  rpc GetBookingById(GetBookingByIdRequest) returns (GetBookingByIdResponse);
+}
+
+service BookingCommandService {
+  rpc CreateBooking(CreateBookingRequest) returns (CreateBookingResponse);
+  rpc DeleteBooking(DeleteBookingRequest) returns (DeleteBookingResponse);
+}
+
+message GetAllBookingsRequest {}
+
+message GetAllBookingsResponse {
+  repeated Booking bookings = 1;
+}
+
+message GetBookingByIdRequest {
+  string id = 1;
+}
+
+message GetBookingByIdResponse {
+  optional Booking booking = 1;
+}
+
+message CreateBookingRequest {
+  string user_id = 1;
+  string event_id = 2;
+  int32 quantity = 3;
+}
+
+message CreateBookingResponse {
+  string id = 1;
+}
+
+message DeleteBookingRequest {
+  string id = 1;
+}
+
+message DeleteBookingResponse {
+  string id = 1;
+}

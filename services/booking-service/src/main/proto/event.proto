@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "EventProto";
+
+package tpa.network.eventservice;
+
+import "google/protobuf/timestamp.proto";
+
+message Event {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string image_url = 4;
+
+  google.protobuf.Timestamp datetime = 5;
+  int32 duration_minutes = 6;
+  string location = 7;
+  double price = 8;
+
+  int32 capacity = 9;
+  int32 seats_available = 10;
+}
+
+service EventQueryService {
+  rpc GetAllEvents (GetAllEventsRequest) returns (GetAllEventsResponse);
+  rpc GetEventById (GetEventByIdRequest) returns (GetEventByIdResponse);
+}
+
+service EventCommandService {
+  rpc CreateEvent (CreateEventRequest) returns (CreateEventResponse);
+  rpc DeleteEvent (DeleteEventRequest) returns (DeleteEventResponse);
+  rpc UpdateSeats (UpdateSeatsRequest) returns (UpdateSeatsResponse);
+}
+
+message GetAllEventsRequest {}
+
+message GetAllEventsResponse {
+  repeated Event events = 1;
+}
+
+message GetEventByIdRequest {
+  string id = 1;
+}
+
+message GetEventByIdResponse {
+  optional Event event = 1;
+}
+
+message CreateEventRequest {
+  string title = 1;
+  string description = 2;
+  string image_url = 3;
+  google.protobuf.Timestamp datetime = 4;
+  int32 duration_minutes = 5;
+  string location = 6;
+  double price = 7;
+  int32 capacity = 8;
+}
+
+message CreateEventResponse {
+  string id = 1;
+}
+
+message DeleteEventRequest {
+  string id = 1;
+}
+
+message DeleteEventResponse {
+  string id = 1;
+}
+
+message UpdateSeatsRequest {
+  string event_id = 1;
+  int32 quantity = 2;
+}
+
+message UpdateSeatsResponse {
+  bool success = 1;
+  int32 seats_available = 2;
+  string error_message = 3;
+}

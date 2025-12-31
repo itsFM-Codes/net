@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.5); }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a; 
+}
+::-webkit-scrollbar-thumb {
+  background: #334155; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569; 
+}
+
+.stars {
+  background-image: 
+    radial-gradient(1.5px 1.5px at 20px 30px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 40px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 50px 160px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 160px 120px, #fff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  opacity: 0.7;
+}
+
+.nebula-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.2) 0%, rgba(15, 23, 42, 1) 100%);
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .featured-events-container {
+    height: 380px !important;
+  }
+  .featured-events-card {
+    width: 280px !important;
+    height: 380px !important;
+  }
+  .featured-events-header {
+    margin-bottom: 2rem !important;
+  }
+  .featured-events-dots {
+    margin-top: 1rem !important;
+  }
+  .featured-events-button {
+    margin-top: 1rem !important;
+  }
+  .featured-events-description {
+    bottom: 2rem !important;
+  }
+
+  .testimonials-center {
+    width: 550px !important;
+    height: 550px !important;
+  }
+  .testimonials-stats {
+    bottom: 2.5rem !important;
+    gap: 2rem !important;
+  }
+  .testimonials-bubble {
+    width: 280px !important;
+  }
+}
