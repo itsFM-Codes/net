@@ -99,11 +99,11 @@ export default function Login() {
     try {
       const response = await authService.login({ email, password });
       
-      if (response.payload) {
+      if (response.payload && !response.error) {
         login(response.payload.accessToken, response.payload.refreshToken);
         router.push("/");
       } else {
-        setError(response.error || "Login failed. Please try again.");
+        setError(response.error || "Invalid email or password. Please try again.");
       }
     } catch {
       setError("An unexpected error occurred. Please try again.");
