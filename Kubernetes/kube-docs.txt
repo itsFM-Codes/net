@@ -14,6 +14,8 @@
 	- Lanjut step di bizanosa
 	- END step sampai di [Test your cluster - deploy nginx]
 
+	- (Penting, ganti IP)sudo kubeadm init --apiserver-advertise-address=192.168.100.11 --pod-network-cidr=192.168.0.0/16
+
 	- Untuk install CNI (Cillium udah) dan CRI (containerd) udah
 	- Untukk install CSI, bisa dilihat disini step by stepnya (https://longhorn.io/docs/1.10.1/deploy/install/#installation-requirements)
 
@@ -23,7 +25,7 @@
  	- Liat file config yg di folder yg sama
  
  - Sebelum jalanin .yamlnya, baca NOTE di setiap foldernya terlebih dahulu (ADA yang harus diganti)
-
+ 
  - Di dalam folder ada config buat auto scaling
  - Commandnya : kubectl autoscale deployment [NAMA APP DEPLOYMENT DI YALM] --cpu-percent=50 --min=2 --max=10
  - klo udah, kubectl get hpa
