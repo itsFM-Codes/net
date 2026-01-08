@@ -22,7 +22,9 @@ services:
   auth-service:
     image: auth-service
     container_name: auth-service
-    build: ./services/auth-service
+    build:
+      context: .
+      dockerfile: services/auth-service/Dockerfile
     ports:
       - "8080:8080"
     environment:
@@ -33,7 +35,9 @@ services:
   booking-service:
     image: booking-service
     container_name: booking-service
-    build: ./services/booking-service
+    build:
+      context: .
+      dockerfile: services/booking-service/Dockerfile
     ports:
       - "8081:8081"
     environment:
@@ -44,7 +48,9 @@ services:
   event-service:
     image: event-service
     container_name: event-service
-    build: ./services/event-service
+    build:
+      context: .
+      dockerfile: services/event-service/Dockerfile
     ports:
       - "8082:8082"
     environment:
@@ -55,7 +61,9 @@ services:
   user-service:
     image: user-service
     container_name: user-service
-    build: ./services/user-service
+    build:
+      context: .
+      dockerfile: services/user-service/Dockerfile
     ports:
       - "8083:8083"
     environment:
