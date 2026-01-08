@@ -1,42 +1,22 @@
-kube.depapiVersion: apps/v1
-kind: Deployment
+apiVersion: mongodb.com/v1
+kind: MongoDB
 metadata:
-  name: pulsar-mongo
-  namespace: default
-  labels:
-    app: pulsar-mongo
+  name: pulsar-sharded-mongo
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      app: pulsar-mongo
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: pulsar-mongo
-    spec:
-      containers:
-        - name: pulsar-mongo
-          image: dockerhubusername/IMAGEname:latest
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 3000
-          resources:
-            requests:
-              cpu: 100m
-              memory: 100Mi
-            limits:
-              cpu: 100m
-              memory: 100Mi
-              
-          # env:
-          # - name : FRONTEND_HOST
-          #   valueFrom:
-          #     configMapKeyRef:
-          #       name: pulsar-db-config
-          #       key: FRONTEND_HOST
+  shardCount: 2
+  mongodsPerShardCount: 3
+  mongosCount: 2
+  configServerCount: 3
+  version: "8.0.0"
+  image: dockerhubusername/IMAGEname:latest
+  credentials: pulsar-mongo-secret
+  type: ShardedCluster
+  persistent: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 100m
+      memory: 100Mi

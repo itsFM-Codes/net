@@ -34,8 +34,15 @@ spec:
               cpu: 100m
               memory: 100Mi
           env:
-          - name : MONGO_URL
+          - name: MONGO_USERNAME
             valueFrom:
-              configMapKeyRef:
-                name: pulsar-backend-config
-                key: MONGO_URL
+              secretKeyRef:
+                name: pulsar-backend-secret
+                key: MONGO_USERNAME
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pulsar-backend-secret
+                key: MONGO_PASSWORD
+          - name: MONGO_URL
+            value: "mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb:27017/"
