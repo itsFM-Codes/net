@@ -32,7 +32,8 @@ resource "proxmox_vm_qemu" "workers" {
 }
 
 resource "proxmox_vm_qemu" "control_plane" {
-    name="k8s-control"
+    count       = var.control_plane_count
+    name        = "k8s-control-${count.index}"
     target_node = var.target_node
     clone = var.template_id
     full_clone = true
