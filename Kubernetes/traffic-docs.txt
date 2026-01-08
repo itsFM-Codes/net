@@ -1,0 +1,11 @@
+1. Keepalived & HAProxy
+
+ - Untuk install : https://www.youtube.com/watch?v=pnyLmsDUBpE (Time 05:00)
+ -
+
+2. MetalLB
+ - kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/refs/heads/main/config/manifests/metallb-native.yaml
+
+
+
+	
