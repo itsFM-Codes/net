@@ -9,7 +9,7 @@ spec:
   mongosCount: 2
   configServerCount: 3
   version: "8.0.0"
-  image: dockerhubusername/IMAGEname:latest
+  image: tpanet252/mongo:latest
   credentials: pulsar-mongo-secret
   type: ShardedCluster
   persistent: true
