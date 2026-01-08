@@ -1,7 +1,7 @@
 FROM gradle:8.14-jdk21 AS builder
 WORKDIR /app
 
-COPY services/booking-service .
+COPY services/auth-service .
 RUN gradle bootJar -x test --no-daemon
 
 FROM eclipse-temurin:21-jre-alpine
