@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pulsar-frontend-config
+  namespace: default
+data:
+  FRONTEND_HOST: 3000
