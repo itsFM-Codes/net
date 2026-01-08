@@ -1,0 +1,5 @@
+- name: prepare all nodes
+  hosts: all
+  become: true
+  roles:
+    - prerequisite
