@@ -1,0 +1,53 @@
+COMMAND USED
+
+OBSERVABILITY 
+============
+
+apply → Menerapkan konfigurasi YAML
+-n observability → Resource dibuat di namespace observability
+-f <folder>/ → Menggunakan semua file YAML dalam folder
+
+kubectl create namespace observability
+--> Membuat namespace khusus bernama observability
+
+kubectl apply -n observability -f loki/
+--> deploy loki
+fungsi loki:
+- Menyimpan dan mengelola log aplikasi
+
+kubectl apply -n observability -f tempo/
+--> deploy tempo
+fungsi tempo:
+- Menelusuri request antar service (end-to-end)
+- Membantu debugging latency & bottleneck
+
+kubectl apply -n observability -f mimir/
+--> deploy mimir
+fungsi mimir:
+- Menyimpan metrics jangka panjang
+- Skalabel untuk lingkungan production
+- Digunakan Grafana sebagai data source metrics
+
+kubectl apply -n observability -f otel/otel-config.yaml
+--> deploy otel-config
+fungsi otel-config:
+- Mengaplikasikan ConfigMap OpenTelemetry
+
+kubectl apply -n observability -f otel/otel-deployment.yaml
+--> deploy otel-deployment
+fungsi otel-deployment:
+- Menerima telemetry dari aplikasi
+- Mengirimkan:
+    Logs → Loki
+    Traces → Tempo
+    Metrics → Mimir
+
+kubectl apply -n observability -f grafana/
+--> deploy grafana
+fungsi grafana:
+- Grafana digunakan sebagai dashboard utama
+
+kubectl apply -n observability -f grafana/ingress.yaml
+--> deploy ingress
+fungsi ingress:
+- Memungkinkan akses Grafana dari browser melalui domain / URL

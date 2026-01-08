@@ -1,0 +1,8 @@
+groups:
+- name: observability-alerts
+  rules:
+  - alert: HighCPUUsage
+    expr: avg(rate(process_cpu_seconds_total[1m])) > 0.9
+    for: 1m
+    annotations:
+      summary: CPU usage above 90%

@@ -1,0 +1,30 @@
+
+Sebelum deploy, ganti line DI:
+next-deploy.yaml
+
+Yang diganti:
+=============================================
+spec:
+      containers:
+        - name: pulsar-frontend
+          image: dockerhubusername/IMAGEname:latest
+=============================================
+
+Pastiin imagenya ambil nama docker hub username & image name yang di push
+
+
+
+
+To deploy, 
+
+
+kubectl apply -f k8s/next-service.yaml
+
+
+Cek progress:
+kubectl get pods
+
+
+Pastiin port node yang di expose itu 30000 (di next-service.yaml)
+
+

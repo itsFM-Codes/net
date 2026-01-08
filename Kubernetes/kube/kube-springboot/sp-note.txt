@@ -1,0 +1,23 @@
+Sebelum deploy, ganti line DI:
+sp-deploy.yaml
+
+Yang diganti:
+=============================================
+spec:
+      containers:
+        - name: pulsar-backend
+          image: dockerhubusername/IMAGEname:latest
+=============================================
+
+Pastiin imagenya ambil nama docker hub username & image name yang di push
+
+
+
+
+
+Cek progress:
+kubectl get pods
+
+
+
+

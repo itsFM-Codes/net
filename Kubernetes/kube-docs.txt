@@ -1,0 +1,42 @@
+1. Setup VM as Control Node & Worker Node (https://www.youtube.com/watch?v=lOxwwq0LQYo)
+ - Untuk Control plane, RAM : 4-5 GB, Storage: 20-24 GB, Core: 1-2 vCPUs
+	- ssh[vm]@[control ip] DAN ssh[vm]@[worker ip] 
+	- sudo apt update && sudo apt upgrade -y (on worker & control)
+	- pastikan bisa ping satu sama lain (dengan control dan worker)
+
+
+2. Install kubeadm on both worker and control node  (https://www.youtube.com/watch?v=W3337KFn5I0)  <-- video ini udah ada sectionnya kalua mau lebih jeals
+ - SSH into control and worker
+	- Step by step (https://bizanosa.com/install-kubernetes-with-kubeadm/) --> Ikutin ini aja udah ada commandnya
+	- Note : perhatiin juga ada IP untuk worker dan juga control disitu yg beda dri vm 
+	- Ikutin SEMUA step kecuai sampai Install CNI, disini pakai Cilium
+	- Untuk cilium (https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/) dari Install the Cilium CLI lalu dibawahnya yang install Cilium
+	- Lanjut step di bizanosa
+	- END step sampai di [Test your cluster - deploy nginx]
+
+	- (Penting, ganti IP)sudo kubeadm init --apiserver-advertise-address=192.168.100.11 --pod-network-cidr=192.168.0.0/16
+
+	- Untuk install CNI (Cillium udah) dan CRI (containerd) udah
+	- Untukk install CSI, bisa dilihat disini step by stepnya (https://longhorn.io/docs/1.10.1/deploy/install/#installation-requirements)
+
+
+3. Init config kube for app
+ - Pastiin dockerfilenya udh ada & dipush di docker hub biar dapet urlnya
+ 	- Liat file config yg di folder yg sama
+ 
+ - Sebelum jalanin .yamlnya, baca NOTE di setiap foldernya terlebih dahulu (ADA yang harus diganti)
+ 
+ - Di dalam folder ada config buat auto scaling
+ - Commandnya : kubectl autoscale deployment [NAMA APP DEPLOYMENT DI YALM] --cpu-percent=50 --min=2 --max=10
+ - klo udah, kubectl get hpa
+ - kalo mau test ada di (https://kubernetes.io/id/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)
+	- Di bagian adding load
+
+
+
+4. Deploy kube app yang udah di config
+	- Jalanin semua yang di folder dengan command :
+	   [ kubectl apply -f kube/ ]
+
+
+ 

@@ -1,0 +1,22 @@
+apiVersion: mongodb.com/v1
+kind: MongoDB
+metadata:
+  name: pulsar-sharded-mongo
+spec:
+  replicas: 3
+  shardCount: 2
+  mongodsPerShardCount: 3
+  mongosCount: 2
+  configServerCount: 3
+  version: "8.0.0"
+  image: dockerhubusername/IMAGEname:latest
+  credentials: pulsar-mongo-secret
+  type: ShardedCluster
+  persistent: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 100m
+      memory: 100Mi
