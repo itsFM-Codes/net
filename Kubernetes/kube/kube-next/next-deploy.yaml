@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: pulsar-frontend
-          image: dockerhubusername/IMAGEname:latest
+          image: tpanet252/frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3000

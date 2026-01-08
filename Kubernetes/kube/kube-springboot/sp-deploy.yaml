@@ -21,8 +21,96 @@ spec:
         app: pulsar-backend
     spec:
       containers:
-        - name: pulsar-backend
-          image: dockerhubusername/IMAGEname:latest
+        - name: auth-service
+          image: tpanet252/auth-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env:
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: pulsar-backend-secret
+                key: MONGO_USERNAME
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pulsar-backend-secret
+                key: MONGO_PASSWORD
+          - name: MONGO_URL
+            value: "mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb:27017/"
+        
+        
+        
+        
+        
+        - name: booking-service
+          image: tpanet252/booking-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env:
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: pulsar-backend-secret
+                key: MONGO_USERNAME
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pulsar-backend-secret
+                key: MONGO_PASSWORD
+          - name: MONGO_URL
+            value: "mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb:27017/"
+        
+        
+        
+        
+        
+        
+        - name: event-service
+          image: tpanet252/event-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env:
+          - name: MONGO_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: pulsar-backend-secret
+                key: MONGO_USERNAME
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pulsar-backend-secret
+                key: MONGO_PASSWORD
+          - name: MONGO_URL
+            value: "mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@mongodb:27017/"
+
+
+        - name: user-service
+          image: tpanet252/user-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
